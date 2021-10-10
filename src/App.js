@@ -1,16 +1,29 @@
+import { lazy, Suspense } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import Sidebar from 'components/Sidebar';
 import './App.css';
-import ContactForm from './components/ContactForm';
-import Filter from './components/Filter';
-import ContactList from './components/ContactList';
+import { routes } from 'utils/routes';
 
-const App = () => (
-    <div>
-      <h1 className="text">Phonebook</h1>
-      <ContactForm />
-      <h2 className="text">Contacts</h2>
-      <Filter />
-      <ContactList />
-    </div>
-  )
+const Registration = lazy(() => import('./components/Registration' /* webpackChunkName: "Registration" */));
+const Login = lazy(() => import('./components/Login' /* webpackChunkName: "Login" */));
+const ContactsView = lazy(() => import('./views/ContactsView' /* webpackChunkName: "ContactsView" */));
+const NotFoundPage = lazy(() => import('./views/NotFoundPage' /* webpackChunkName: "NotFoundPage" */ ));
+
+const App = () => {
+
+  return (
+    <>
+      <Sidebar />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route path={routes.contacts} exact component={ContactsView} />
+          <Route path={routes.login} exact component={Login} />
+          <Route path={routes.register} exact component={Registration} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </Suspense>
+    </>
+  );
+}
 
 export default (App);
