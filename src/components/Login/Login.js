@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { Formik } from 'formik';
 import { Link } from "react-router-dom";
 import { routes } from "utils/routes";
@@ -8,14 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import s from './Login.module.css';
-
-/** 
- * NOTE: initial values in registration form
-    values = {
-        email: '',
-        password: '',
-    }
-*/
+import authOperations from "redux/auth/auth-operations";
 
 const INITIAL_VALUES = {
     email: '',
@@ -23,6 +17,7 @@ const INITIAL_VALUES = {
 };
  
 const Login = () => {
+    const dispatch = useDispatch();
     const [showPassword, setShowPassword] = useState(false);
 
     const validate = useCallback(values => {
@@ -43,9 +38,9 @@ const Login = () => {
     }, []);
 
     const handleSubmit = useCallback((values, { setSubmitting }) => {
-        alert(JSON.stringify(values, null, 2));
+        dispatch(authOperations.logIn(values));
         setSubmitting(false);
-    }, []);
+    }, [dispatch]);
 
     const togglePassword = useCallback(() => {
         setShowPassword(prev => !prev);
@@ -53,7 +48,7 @@ const Login = () => {
 
     return (
         <>
-            <h1 className="text">Sing in form</h1>
+            <h1 className="text">Sign in form</h1>
             <div className={s.loginWindow}>
                 <Formik
                     initialValues={INITIAL_VALUES}

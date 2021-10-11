@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Formik } from 'formik';
 import { Link } from "react-router-dom";
 import { routes } from "utils/routes";
@@ -8,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import s from './Registration.module.css';
+import  authOperations  from "redux/auth/auth-operations";
 /** 
  * NOTE: initial values in registration form
     values = {
@@ -28,6 +30,7 @@ const INITIAL_VALUES = {
 const Registration = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const dispatch = useDispatch();
 
     const validate = useCallback(values => {
         const errors = {};
@@ -64,11 +67,9 @@ const Registration = () => {
     }, []);
 
     const handleSubmit = useCallback((values, { setSubmitting }) => {
-        setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-        }, 400);
-    }, []);
+        dispatch(authOperations.register({name: values.name, email: values.email, password: values.password}));
+        setSubmitting(false);
+    }, [dispatch]);
 
     const togglePassword = useCallback(() => {
         setShowPassword(prev => !prev);
