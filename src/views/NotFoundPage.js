@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 function NotFoundPage() {
     const history = useHistory();
 
-    history.push('/register');
+    history.push('/');
 
     return <h1>404 Page not found :(</h1>
 }
