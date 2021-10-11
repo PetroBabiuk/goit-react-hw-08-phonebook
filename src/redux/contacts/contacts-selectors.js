@@ -15,12 +15,3 @@ export const getVisibleContacts = createSelector(
             name.toLocaleLowerCase().includes(normalizedFilter));
     },
 );
-
-// export const getVisibleContacts = state => {
-//     const filter = getFilter(state);
-//     const contacts = getContacts(state);
-    // const normalizedFilter = filter.toLocaleLowerCase();
-
-    // return contacts.filter(({ name }) =>
-    //     name.toLocaleLowerCase().includes(normalizedFilter));
-// };
