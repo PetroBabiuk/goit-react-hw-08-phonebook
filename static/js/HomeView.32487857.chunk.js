@@ -1,0 +1,2 @@
+(this["webpackJsonpgoit-react-hw-08-phonebook"]=this["webpackJsonpgoit-react-hw-08-phonebook"]||[]).push([[2],{197:function(e,t,s){"use strict";s.r(t);s(0);var o=s(1);t.default=function(){return Object(o.jsx)("div",{children:Object(o.jsxs)("h1",{className:"text",children:["Hello, this is welcome page of our service"," ",Object(o.jsx)("img",{src:"https://img.icons8.com/ios/50/000000/salute.png",alt:"greatins-icon"})]})})}}}]);
+//# sourceMappingURL=HomeView.32487857.chunk.js.map
